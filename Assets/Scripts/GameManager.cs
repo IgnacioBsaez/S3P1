@@ -1,37 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
-    public int felicidad;
-    public int felicidadMaxima;
+    public int score;
+    public float tiempo;
+    public TextMeshProUGUI textoScore;
+    public TextMeshProUGUI textoTime;
+    public TextMeshProUGUI textoWin;
 
     private void Awake()
     {
         manager = this;
     }
-    public void GameOver()
-        {
-            // boton game over
-            print("GAME OVER");
-        }
-
-    public void WinGame() 
-        {
-        print("gano");
-        }
-
-    public void ResetGame() { }
-
-    public void ChequearSiGano()
+    public void MostrarScore()
     {
-        if(felicidad >= felicidadMaxima)
+        textoScore.text = "score= " + score;
+
+    }
+
+    private void Update()
+    {
+        tiempo += Time.deltaTime;
+        textoTime.text = "tiempo: " + (int)tiempo;
+        if(score == 30)
         {
-            WinGame();
+            YouWin();
         }
     }
 
+    private void YouWin()
+    {
+        textoWin.IsActive();
+    }
 
+    private void GameOver()
+    {
+
+    }
 }
